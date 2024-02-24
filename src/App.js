@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import MapDirections from "./MapDirections";
 import "bootstrap/dist/css/bootstrap.min.css";
+import MapDirectionsApi from "./goApiCall";
 
 const apiKey = 'AIzaSyDpMGWebCqbGtD7SJHts4EKRQJaw6kzoPU';
 
@@ -69,6 +70,17 @@ function App() {
             onMapUpdate={handleMapUpdate}
           />
         </div>
+
+        <div className="col-md-6">
+          <MapDirectionsApi
+            apiKey={apiKey}
+            origin={origin}
+            destination={destination}
+            buttonClicked={buttonClicked}
+            onMapUpdate={handleMapUpdate}
+          />
+        </div>
+
       </div>
     </div>
   );

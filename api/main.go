@@ -24,8 +24,19 @@ func getApiKey()(string, error){
 }
 
 func getDirection(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
 	startAddress := r.URL.Query().Get("start")
 	endAddress := r.URL.Query().Get("end")
+
+	if startAddress == "" || endAddress == "" {
+		errorMsg := "Start and end addresses are required."
+		log.Println(errorMsg)
+		http.Error(w, errorMsg, http.StatusBadRequest)
+		return
+	}
 
 	log.Printf("Received GET request for /directions?start=%s&end=%s\n", startAddress, endAddress)
 
