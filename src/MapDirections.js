@@ -1,12 +1,14 @@
+// MapDirections.js
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 
-const MapDirections = React.forwardRef(({ apiKey, origin, destination }, ref) => {
+const MapDirections = React.forwardRef(({ apiKey, origin, destination, buttonClicked, onMapUpdate }, ref) => {
   const [response, setResponse] = useState(null);
 
   const directionsCallback = (res) => {
     if (res !== null) {
       setResponse(res);
+      // Additional callback logic if needed
     }
   };
 
@@ -24,9 +26,13 @@ const MapDirections = React.forwardRef(({ apiKey, origin, destination }, ref) =>
   };
 
   useEffect(() => {
-    // Call handleDirectionsRequest whenever origin or destination changes
-    handleDirectionsRequest();
-  }, [origin, destination]);
+    if (buttonClicked) {
+      // Call handleDirectionsRequest only when buttonClicked is true
+      handleDirectionsRequest();
+      // Reset buttonClicked state to false after processing
+      onMapUpdate();
+    }
+  }, [origin, destination, buttonClicked, onMapUpdate]);
 
   const mapContainerStyle = {
     width: '50vh',
@@ -41,17 +47,17 @@ const MapDirections = React.forwardRef(({ apiKey, origin, destination }, ref) =>
 
   return (
     <div>
-    <LoadScript googleMapsApiKey={apiKey}>
-      <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center}>
-        {response !== null && (
-          <DirectionsRenderer
-            options={{ directions: response, panel: document.getElementById('directions-panel') }}
-          />
-        )}
-      </GoogleMap>
-    </LoadScript>
-    <div id="directions-panel" style={{ marginTop: '10px', padding: '10px', border: '1px solid #ccc' }}></div>
-  </div>
+      <LoadScript googleMapsApiKey={apiKey}>
+        <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center}>
+          {response !== null && (
+            <DirectionsRenderer
+              options={{ directions: response, panel: document.getElementById('directions-panel') }}
+            />
+          )}
+        </GoogleMap>
+      </LoadScript>
+      <div id="directions-panel" style={{ marginTop: '10px', padding: '10px', border: '1px solid #ccc' }}></div>
+    </div>
   );
 });
 
