@@ -16,12 +16,8 @@ const MapDirectionsApi = React.forwardRef(({ apiKey, origin, destination }, ref)
   };
 
   useEffect(() => {
-    if (buttonClicked) {
-      // Call handleDirectionsRequest only when buttonClicked is true
-      handleDirectionsRequest();
-      // Reset buttonClicked state to false after processing
-      onMapUpdate();
-    }
+    // Call handleDirectionsRequest whenever origin or destination changes
+    handleDirectionsRequest();
   }, [origin, destination]);
 
   const mapContainerStyle = {
