@@ -1,9 +1,10 @@
 // App.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import MapDirections from "./MapDirections";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MapDirectionsApi from "./goApiCall";
+import dangerousRoadsData from "./dangerousRoads.json";
 
 const apiKey = 'AIzaSyDpMGWebCqbGtD7SJHts4EKRQJaw6kzoPU';
 
@@ -11,6 +12,8 @@ function App() {
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
   const [buttonClicked, setButtonClicked] = useState(false);
+  const [dangerousRoads, setDangerousRoads] = useState(["Harvey Mitchell"]);
+  const [dangerousRoadFound, setDangerousRoadFound] = useState(false);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -23,6 +26,10 @@ function App() {
     console.log('Origin:', origin);
     console.log('Destination:', destination);
 
+    // Check if the destination is in the list of dangerous roads
+    const isDangerousRoad = dangerousRoads.includes(destination);
+    setDangerousRoadFound(isDangerousRoad);
+
     setButtonClicked(true);
   };
 
@@ -31,7 +38,7 @@ function App() {
   };
 
   return (
-      <div className="container mt-5">
+    <div className="container mt-5">
       <h1 className="text-center">Team Tony Hawk</h1>
       <div className="row">
         <div className="col-md-6">
@@ -70,18 +77,12 @@ function App() {
             onMapUpdate={handleMapUpdate}
           />
         </div>
-
-        <div className="col-md-6">
-          <MapDirectionsApi
-            apiKey={apiKey}
-            origin={origin}
-            destination={destination}
-            buttonClicked={buttonClicked}
-            onMapUpdate={handleMapUpdate}
-          />
-        </div>
-
       </div>
+      {dangerousRoadFound ? (
+        <p className="text-danger">Dangerous road found!</p>
+      ) : (
+        <p>No Dangerous roads found along route. Happy traveling!</p>
+      )}
     </div>
   );
 }
