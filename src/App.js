@@ -30,7 +30,7 @@ function App() {
   };
 
   return (
-    <div className="container mt-5">
+      <div className="container mt-5">
       <h1 className="text-center">Team Tony Hawk</h1>
       <div className="row">
         <div className="col-md-6">
