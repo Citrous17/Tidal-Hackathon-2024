@@ -44,11 +44,15 @@ func getDirection(w http.ResponseWriter, r *http.Request) {
 
 	apiKey, err := getApiKey()
 	if err != nil {
-		log.Fatalf("fatal error: %s", err)
+		log.Printf("Error getting API key: %s", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
 	}
 	c, err := maps.NewClient(maps.WithAPIKey(apiKey))
 	if err != nil {
-		log.Fatalf("fatal error: %s", err)
+		log.Printf("Error with map: %s", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
 	}
 	req := &maps.DirectionsRequest{
 		Origin:      startAddress,
@@ -57,7 +61,9 @@ func getDirection(w http.ResponseWriter, r *http.Request) {
 
 	route, _, err := c.Directions(context.Background(), req)
 	if err != nil {
-		log.Fatalf("fatal error: %s", err)
+		log.Printf("Error with directions: %s", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
 	}
 
 	pretty.Println(route)
