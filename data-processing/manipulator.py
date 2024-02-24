@@ -1,5 +1,6 @@
 # Import necessary libraries
 import pandas as pd
+import csv
 
 street_accidents = {}
 
@@ -31,9 +32,15 @@ for index, row in data.iterrows():
     add_accident(street_name, time, severity_rank)
 
 # Printing the data structure
-for street, accidents in street_accidents.items():
-    #print("Street:", street)
-    for accident in accidents:
-        if (accident[1] > 400):
-            print("Street:", street,  "Time:", accident[0], "Severity Rank:", accident[1])
+# for street, accidents in street_accidents.items():
+#    for accident in accidents:
+#        if (accident[1] > 400):
+#            print("Street:", street,  "Time:", accident[0], "Severity Rank:", accident[1])
 
+with open('accidents_summary.csv', 'w', newline='') as csvfile:
+    fieldnames = ['Street', 'Time', 'Severity']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+    for street, accidents in street_accidents.items():
+        for accident in accidents:
+            writer.writerow({'Street': street, 'Time': accident[0], 'Severity': accident[1]})
