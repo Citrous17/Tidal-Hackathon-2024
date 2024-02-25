@@ -10,4 +10,109 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} 
+
+.desktop {
+  background-color: #1f2453;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.desktop .div {
+  background-color: #1f2453;
+  height: 1024px;
+  position: relative;
+  width: 1440px;
+
+}
+
+.desktop .text-wrapper {
+  color: #eae1e1;
+  font-family: "Quicksand-Regular", Helvetica;
+  font-size: 64px;
+  font-weight: 400;
+  left: 543px;
+  letter-spacing: 0;
+  line-height: normal;
+  opacity: 0;
+  position: absolute;
+  top: 155px;
+  transform: translate(-25px, 0);
+}
+
+.desktop .rectangle {
+  background-color: #d9d9d9;
+  height: 592px;
+  left: 863px;
+  position: absolute;
+  top: 325px;
+  width: 382px;
+}
+
+.desktop .text-wrapper-2 {
+  color: #ffffff;
+  font-family: "Quicksand-Regular", Helvetica;
+  font-size: 36px;
+  font-weight: 400;
+  left: 232px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 367px;
+  white-space: nowrap;
+  width: 114px;
+}
+
+.desktop .text-wrapper-3 {
+  color: #ffffff;
+  font-family: "Quicksand-Regular", Helvetica;
+  font-size: 36px;
+  font-weight: 400;
+  left: 232px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 503px;
+  width: 257px;
+}
+
+.desktop .p {
+  color: #ffffff;
+  font-family: "Quicksand-Regular", Helvetica;
+  font-size: 36px;
+  font-weight: 400;
+  left: 229px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 694px;
+  width: 491px;
+}
+
+.desktop .origin-box {
+  background-color: #ffffff;
+  height: 47px;
+  left: 232px;
+  position: absolute;
+  top: 432px;
+  width: 488px;
+}
+
+.desktop .destination-box {
+  background-color: #ffffff;
+  height: 47px;
+  left: 229px;
+  position: absolute;
+  top: 574px;
+  width: 488px;
+}
+
+.desktop .vector {
+  height: 79px;
+  left: 571px;
+  position: absolute;
+  top: 52px;
+  width: 296px;
 }
